@@ -4,8 +4,7 @@
 The code for this has not yet been posted, but will be soon!
 
 
-## 
-Exploring 3D Printing in Topology
+## Exploring 3D Printing in Topology
 At the University of Georgia I spent three semesters exploring 3D printing techniques in topology under [Dr. David Gay][dg] in the [Mathematics Department][ugamath], in particular, visualizing complex shapes and knots using a MakerBot Replicator 2. 
 
 Here's the [project page][project].
