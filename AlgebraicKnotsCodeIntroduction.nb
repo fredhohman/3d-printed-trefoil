@@ -1,0 +1,481 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     17331,        471]
+NotebookOptionsPosition[     16348,        436]
+NotebookOutlinePosition[     16704,        452]
+CellTagsIndexPosition[     16661,        449]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Algebraic Fibered Knots.", "Title",
+ CellChangeTimes->{{3.599958503206674*^9, 3.599958509893882*^9}, 
+   3.6078911861185713`*^9, 3.607892597580995*^9}],
+
+Cell["\<\
+2014 CURO Project
+Fred Hohman
+fred.hohman@gmail.com\
+\>", "Subtitle",
+ CellChangeTimes->{{3.599958515451125*^9, 3.599958521754863*^9}, {
+  3.60787012801003*^9, 3.607870162046884*^9}, {3.6279917718967247`*^9, 
+  3.627991782469899*^9}}],
+
+Cell[TextData[{
+ "This notebook will provide the code to generate various versions of the \
+Trefoil Knot. All appropriate ",
+ StyleBox["Mathematica ",
+  FontSlant->"Italic"],
+ "cells can be evaluated to plot the shape in 3D below.\n\nThe variables to \
+be used are\nu, v \[Epsilon] \[DoubleStruckCapitalC] that define a point in \
+",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["\[DoubleStruckCapitalC]", "2"], TraditionalForm]]],
+ ",\nx, y, z \[Epsilon] \[DoubleStruckCapitalR] that define a point in ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["\[DoubleStruckCapitalR]", "3"], TraditionalForm]]],
+ ",\nr, \[Theta] are two parameters, a radius and angle.\n\nLet\
+\[CloseCurlyQuote]s start by defining the inverse stereographic projection \
+from ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["\[DoubleStruckCapitalR]", "3"], TraditionalForm]]],
+ " to ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["\[DoubleStruckCapitalS]", "3"], TraditionalForm]]],
+ ", which is inside of ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["\[DoubleStruckCapitalR]", "4"], TraditionalForm]]],
+ " in which we identify as ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["\[DoubleStruckCapitalC]", "2"], TraditionalForm]]],
+ ". We will need this technique during the computation.\n",
+ StyleBox["StandardDenominator",
+  FontWeight->"Bold"],
+ " will be a variable that is used throughout the calculations for nicer \
+looking code.\n",
+ StyleBox["gu",
+  FontWeight->"Bold"],
+ " will be the u component of the inverse stereographic projection of point \
+(x, y, z,).\n",
+ StyleBox["gv",
+  FontWeight->"Bold"],
+ " will be the v component of the inverse stereographic projection of point \
+(x, y, z,)."
+}], "Text",
+ CellChangeTimes->{{3.599319260184204*^9, 3.599319275614709*^9}, {
+  3.5993193365528927`*^9, 3.599319362697957*^9}, {3.599958548559119*^9, 
+  3.599958610199626*^9}, {3.5999587501143007`*^9, 3.59995882562624*^9}, {
+  3.5999589002536163`*^9, 3.5999591353664923`*^9}, {3.5999591948498297`*^9, 
+  3.599959224129488*^9}, {3.599959333297826*^9, 3.599959352614934*^9}, {
+  3.599959575808852*^9, 3.599959643217176*^9}, {3.599959710843113*^9, 
+  3.599959721465907*^9}, {3.599959785240986*^9, 3.5999598022407837`*^9}, {
+  3.602522318633057*^9, 3.6025223259738503`*^9}, {3.602865823403735*^9, 
+  3.60286588221393*^9}, {3.60787019052982*^9, 3.607870353710019*^9}, {
+  3.607948827270075*^9, 3.60794882785853*^9}, {3.627991797779683*^9, 
+  3.627991798305603*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"StandardDenominator", "=", 
+   RowBox[{"1", "+", 
+    RowBox[{"x", "^", "2"}], "+", 
+    RowBox[{"y", "^", "2"}], "+", 
+    RowBox[{"z", "^", "2"}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"gu", "[", 
+   RowBox[{"x_", ",", "y_", ",", "z_"}], "]"}], ":=", 
+  RowBox[{
+   RowBox[{"(", 
+    RowBox[{"2", "*", 
+     RowBox[{"x", "/", "StandardDenominator"}]}], ")"}], "+", 
+   RowBox[{"I", "*", 
+    RowBox[{"(", 
+     RowBox[{"2", "*", 
+      RowBox[{"y", "/", "StandardDenominator"}]}], 
+     ")"}]}]}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"gv", "[", 
+   RowBox[{"x_", ",", "y_", ",", "z_"}], "]"}], ":=", 
+  RowBox[{
+   RowBox[{"(", 
+    RowBox[{"2", "*", 
+     RowBox[{"z", "/", "StandardDenominator"}]}], ")"}], "+", 
+   RowBox[{"I", "*", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"-", "1"}], "+", 
+        RowBox[{"x", "^", "2"}], "+", 
+        RowBox[{"y", "^", "2"}], "+", 
+        RowBox[{"z", "^", "2"}]}], ")"}], "/", "StandardDenominator"}], 
+     ")"}]}]}]}]}], "Input",
+ CellChangeTimes->{{3.5993192777393312`*^9, 3.5993193334332037`*^9}, {
+   3.599319438157362*^9, 3.599319560234969*^9}, {3.5993196128689547`*^9, 
+   3.5993196176291037`*^9}, {3.599563270567671*^9, 3.5995632739018383`*^9}, {
+   3.599958485912438*^9, 3.599958490526493*^9}, 3.599959493081193*^9, {
+   3.5999595271892*^9, 3.599959536465365*^9}, 3.5999596511250896`*^9, {
+   3.600266031677339*^9, 3.600266038635548*^9}}],
+
+Cell[TextData[{
+ "Next we will define a function ",
+ StyleBox["pTinf",
+  FontWeight->"Bold"],
+ " that is a polynomial function from ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SuperscriptBox["\[DoubleStruckCapitalC]", "2"], " "}], 
+   TraditionalForm]]],
+ "to \[DoubleStruckCapitalC]. This particular function\[CloseCurlyQuote]s \
+zero set is a trefoil going through infinity."
+}], "Text",
+ CellChangeTimes->{{3.599959655234561*^9, 3.5999596888010397`*^9}, {
+  3.599959725324*^9, 3.599959842055241*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"pTinf", "[", 
+   RowBox[{"u_", ",", "v_"}], "]"}], ":=", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{"u", "+", 
+      RowBox[{"I", "*", "v"}]}], ")"}], "^", "2"}], "-", 
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{"u", "-", 
+      RowBox[{"I", "*", "v"}]}], ")"}], "^", "3"}]}]}]], "Input",
+ CellChangeTimes->{{3.599319637668639*^9, 3.599319678013689*^9}}],
+
+Cell[TextData[{
+ "Next we will define a function from ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["\[DoubleStruckCapitalR]", "3"], TraditionalForm]]],
+ " to \[DoubleStruckCapitalR] called ",
+ StyleBox["inTinftube",
+  FontWeight->"Bold"],
+ " that returns a negative value if the polynomial evaluated at the \
+stereographic inverse (x, y, z) is within radius r of the origin in \
+\[DoubleStruckCapitalC], i.e. if (x, y, z) is within the tube of radius r \
+around the trefoil knot. Note: remember this radius is not the radius in ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["\[DoubleStruckCapitalR]", "3"], TraditionalForm]]],
+ " but the radius in \[DoubleStruckCapitalC], the range of the defining \
+polynomial pTinf."
+}], "Text",
+ CellChangeTimes->{{3.599959848614772*^9, 3.599959906470017*^9}, {
+   3.599959980722022*^9, 3.599960021013548*^9}, {3.599960098660074*^9, 
+   3.5999601731550694`*^9}, {3.607870390955208*^9, 3.607870399817418*^9}, {
+   3.6078912076912813`*^9, 3.607891213748713*^9}, 3.607957669844728*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"inTinftube", "[", 
+   RowBox[{"x_", ",", "y_", ",", "z_", ",", "r_"}], "]"}], ":=", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"Re", "[", 
+     RowBox[{"pTinf", "[", 
+      RowBox[{
+       RowBox[{"gu", "[", 
+        RowBox[{"x", ",", "y", ",", "z"}], "]"}], ",", 
+       RowBox[{"gv", "[", 
+        RowBox[{"x", ",", "y", ",", "z"}], "]"}]}], "]"}], "]"}], "^", "2"}], 
+   "+", 
+   RowBox[{
+    RowBox[{"Im", "[", 
+     RowBox[{"pTinf", "[", 
+      RowBox[{
+       RowBox[{"gu", "[", 
+        RowBox[{"x", ",", "y", ",", "z"}], "]"}], ",", 
+       RowBox[{"gv", "[", 
+        RowBox[{"x", ",", "y", ",", "z"}], "]"}]}], "]"}], "]"}], "^", "2"}], 
+   "-", 
+   RowBox[{"r", "^", "2"}]}]}]], "Input",
+ CellChangeTimes->{{3.599319698689822*^9, 3.5993196990862637`*^9}, {
+  3.599319732935451*^9, 3.599319793082096*^9}, {3.599319830693421*^9, 
+  3.599319850204987*^9}}],
+
+Cell[TextData[{
+ "Next we will define a function to be called ",
+ StyleBox["onTinfpage",
+  FontWeight->"Bold"],
+ " from ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["\[DoubleStruckCapitalR]", "3"], TraditionalForm]]],
+ " to \[DoubleStruckCapitalR] that returns a negative value if the polynomial \
+evaluated at stereographic inverse (x, y, z) gives a value in \
+\[DoubleStruckCapitalC] to the counterclockwise side of the ray defined by \
+angle \[Theta]."
+}], "Text",
+ CellChangeTimes->{{3.599960112765584*^9, 3.599960116413289*^9}, {
+  3.599960197849659*^9, 3.5999602743026133`*^9}, {3.6078704118161583`*^9, 
+  3.6078704146551733`*^9}, {3.607891223774702*^9, 3.60789123031744*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"onTinfpage", "[", 
+   RowBox[{"x_", ",", "y_", ",", "z_", ",", "\[Theta]_"}], "]"}], ":=", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"-", 
+     RowBox[{"Sin", "[", "\[Theta]", "]"}]}], "*", 
+    RowBox[{"Re", "[", 
+     RowBox[{"pTinf", "[", 
+      RowBox[{
+       RowBox[{"gu", "[", 
+        RowBox[{"x", ",", "y", ",", "z"}], "]"}], ",", 
+       RowBox[{"gv", "[", 
+        RowBox[{"x", ",", "y", ",", "z"}], "]"}]}], "]"}], "]"}]}], "+", 
+   RowBox[{
+    RowBox[{"Cos", "[", "\[Theta]", "]"}], "*", 
+    RowBox[{"Im", "[", 
+     RowBox[{"pTinf", "[", 
+      RowBox[{
+       RowBox[{"gu", "[", 
+        RowBox[{"x", ",", "y", ",", "z"}], "]"}], ",", 
+       RowBox[{"gv", "[", 
+        RowBox[{"x", ",", "y", ",", "z"}], "]"}]}], "]"}], 
+     "]"}]}]}]}]], "Input",
+ CellChangeTimes->{{3.599319867039802*^9, 3.5993199600647573`*^9}}],
+
+Cell[TextData[{
+ "From here we should have everything we need to plot the shapes in 3D. We \
+can use a RegionPlot3D function to plot combinations of the knot, the rays, \
+and the boundary shapes that we will contain the knot it (in order to be able \
+to print an object that doesn\[CloseCurlyQuote]t stretch on to infinity...).\n\
+\nNotes: \nThe option ",
+ StyleBox["PlotPoints",
+  FontWeight->"Bold"],
+ " will determine the \[OpenCurlyDoubleQuote]resolution\
+\[CloseCurlyDoubleQuote] or the shape, i.e., how well the shape renders. For \
+quick testing, set this value to something smaller (anywhere from 40-60), but \
+not small enough to where holes start to appear in the plot. \nFor final \
+models that you wish to export and print, I used a PlotPoints of 200-250. It\
+\[CloseCurlyQuote]s also worth noting that computation time will be higher \
+for larger value of PlotPoints. To be exact, since this is a plot in ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SuperscriptBox["\[DoubleStruckCapitalR]", "3"], ","}], 
+   TraditionalForm]]],
+ " every time we double PlotPoints we will be multiplying our computation \
+time by 8, since ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SuperscriptBox["2", "3"], "=", "8"}], TraditionalForm]]],
+ ".\n\nBe aware of the thickness of the knot as well as plot range of each \
+coordinate axis when plotting the objects. They vary from section to section.\
+\n\nIt\[CloseCurlyQuote]s easier to create new versions of the knot (with \
+more advanced geometry) by considering a cross section. This way the Boolean \
+algebra becomes manageable."
+}], "Text",
+ CellChangeTimes->{{3.5999604051093693`*^9, 3.599960424139323*^9}, {
+  3.599960601185371*^9, 3.599960675654665*^9}, {3.5999607185026693`*^9, 
+  3.5999607365452843`*^9}, {3.599960775062593*^9, 3.59996081795219*^9}, {
+  3.599960885995595*^9, 3.599960905633144*^9}, {3.59996093577706*^9, 
+  3.5999610830367804`*^9}, {3.606328760759029*^9, 3.6063287609311047`*^9}, {
+  3.6078704402616987`*^9, 3.607870583940291*^9}, {3.607881802056386*^9, 
+  3.607881843946843*^9}, {3.6078829308211803`*^9, 3.607882971145122*^9}, {
+  3.607884552112409*^9, 3.607884553525688*^9}, {3.607891236535967*^9, 
+  3.607891237816988*^9}, {3.607891275810918*^9, 3.607891276986458*^9}, {
+  3.607951498504384*^9, 3.6079515703733797`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["Initial Models Tests.", "Section",
+ CellChangeTimes->{{3.602870870612813*^9, 3.602870877091447*^9}, {
+  3.606669596778973*^9, 3.60666959772243*^9}, {3.607880907942769*^9, 
+  3.6078809081814327`*^9}, {3.607891853170203*^9, 3.607891861340667*^9}}],
+
+Cell["\<\
+Here we will plot some basic objects to familiarize ourselves with the \
+functions being used.\
+\>", "Text",
+ CellChangeTimes->{{3.6078812846716003`*^9, 3.607881306529731*^9}, 
+   3.607891280872447*^9}],
+
+Cell[TextData[{
+ "So let\[CloseCurlyQuote]s start by plotting the knot by itself. To do this, \
+we will tell ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " to only plot the points that are inside inTinftube with radius r = 1, and \
+we will use a boundary condition of a cylinder of radius 3 and height 6 \
+centered at the origin. Notice that to use RegionPlot3D we have to define our \
+objects by means of inequalities and Boolean algebra."
+}], "Text",
+ CellChangeTimes->{
+  3.607870626331111*^9, {3.607870786326812*^9, 3.6078708027874527`*^9}, {
+   3.607891282298971*^9, 3.6078912998990517`*^9}}],
+
+Cell["Standard trefoil.", "Text",
+ CellChangeTimes->{{3.606669625684836*^9, 3.606669629027348*^9}, {
+  3.607870825023753*^9, 3.6078708255594063`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"RegionPlot3D", "[", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"inTinftube", "[", 
+       RowBox[{"x", ",", "y", ",", "z", ",", "1.0"}], "]"}], "<", "0"}], 
+     ")"}], "\[IndentingNewLine]", "&&", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"x", "^", "2"}], "+", 
+      RowBox[{"y", "^", "2"}]}], "<", "9"}], "&&", 
+    RowBox[{"z", ">", 
+     RowBox[{"-", "3"}]}], " ", "&&", 
+    RowBox[{"z", "<", "3"}]}], ",", " ", 
+   RowBox[{"{", 
+    RowBox[{"x", ",", 
+     RowBox[{"-", "3"}], ",", "3"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"y", ",", 
+     RowBox[{"-", "3"}], ",", "3"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"z", ",", 
+     RowBox[{"-", "3"}], ",", "3"}], "}"}], ",", 
+   RowBox[{"AxesLabel", "\[Rule]", "Automatic"}], ",", 
+   RowBox[{"ImageSize", "\[Rule]", "850"}], ",", 
+   RowBox[{"PlotPoints", "\[Rule]", "50"}], ",", 
+   RowBox[{"Mesh", "\[Rule]", "None"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.600266049562447*^9, 3.600266217377248*^9}, {
+  3.600266309212386*^9, 3.600266309509907*^9}, {3.60026634005302*^9, 
+  3.6002663795636683`*^9}, {3.607870809814024*^9, 3.607870868230813*^9}, {
+  3.6078709930551977`*^9, 3.60787099318367*^9}}],
+
+Cell[TextData[{
+ "Now let\[CloseCurlyQuote]s plot the knot and 1 ray from ",
+ Cell[BoxData[
+  FormBox[
+   FractionBox["\[Pi]", "6"], TraditionalForm]]],
+ " to ",
+ Cell[BoxData[
+  FormBox[
+   FractionBox["\[Pi]", "3"], TraditionalForm]]],
+ ". Note that even at a PlotPoints of 100, there are still some moderate \
+holes. "
+}], "Text",
+ CellChangeTimes->{{3.5999618663535337`*^9, 3.5999619262555428`*^9}, {
+  3.599962485902379*^9, 3.5999625028746*^9}, {3.60787085310218*^9, 
+  3.607870853812731*^9}}],
+
+Cell[BoxData[
+ RowBox[{"RegionPlot3D", "[", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"onTinfpage", "[", 
+          RowBox[{"x", ",", "y", ",", "z", ",", 
+           RowBox[{"Pi", "/", "6"}]}], "]"}], "<", "0"}], " ", "&&", " ", 
+        RowBox[{
+         RowBox[{"onTinfpage", "[", 
+          RowBox[{"x", ",", "y", ",", "z", ",", 
+           RowBox[{"Pi", "/", "3"}]}], "]"}], ">", "0"}]}], ")"}], " ", 
+      "\[IndentingNewLine]", "||", " ", 
+      RowBox[{
+       RowBox[{"inTinftube", "[", 
+        RowBox[{"x", ",", "y", ",", "z", ",", "1.0"}], "]"}], "<", "0"}]}], 
+     ")"}], "\[IndentingNewLine]", "&&", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"x", "^", "2"}], "+", 
+      RowBox[{"y", "^", "2"}]}], "<", "9"}], "&&", 
+    RowBox[{"z", ">", 
+     RowBox[{"-", "3"}]}], " ", "&&", 
+    RowBox[{"z", "<", "3"}]}], ",", " ", 
+   RowBox[{"{", 
+    RowBox[{"x", ",", 
+     RowBox[{"-", "3"}], ",", "3"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"y", ",", 
+     RowBox[{"-", "3"}], ",", "3"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"z", ",", 
+     RowBox[{"-", "3"}], ",", "3"}], "}"}], ",", 
+   RowBox[{"AxesLabel", "\[Rule]", "Automatic"}], ",", 
+   RowBox[{"ImageSize", "\[Rule]", "850"}], ",", 
+   RowBox[{"PlotPoints", "\[Rule]", "100"}], ",", 
+   RowBox[{"Mesh", "\[Rule]", "None"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.599961957329261*^9, 3.599961997301319*^9}, {
+   3.599962052694044*^9, 3.599962095084343*^9}, {3.599962217443666*^9, 
+   3.599962218075842*^9}, {3.6078708738630457`*^9, 3.607870882783044*^9}, {
+   3.607871010783409*^9, 3.607871011814169*^9}, 3.607880704882319*^9}]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{840, 960},
+WindowMargins->{{Automatic, 0}, {Automatic, -1}},
+FrontEndVersion->"10.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (December 4, \
+2014)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 157, 2, 92, "Title"],
+Cell[740, 26, 244, 7, 111, "Subtitle"],
+Cell[987, 35, 2438, 57, 262, "Text"],
+Cell[3428, 94, 1499, 41, 63, "Input"],
+Cell[4930, 137, 504, 14, 50, "Text"],
+Cell[5437, 153, 401, 13, 28, "Input"],
+Cell[5841, 168, 1022, 21, 89, "Text"],
+Cell[6866, 191, 892, 26, 46, "Input"],
+Cell[7761, 219, 684, 15, 69, "Text"],
+Cell[8448, 236, 864, 25, 46, "Input"],
+Cell[9315, 263, 2294, 41, 336, "Text"],
+Cell[CellGroupData[{
+Cell[11634, 308, 251, 3, 64, "Section"],
+Cell[11888, 313, 212, 5, 30, "Text"],
+Cell[12103, 320, 605, 12, 87, "Text"],
+Cell[12711, 334, 150, 2, 30, "Text"],
+Cell[12864, 338, 1238, 32, 80, "Input"],
+Cell[14105, 372, 498, 14, 57, "Text"],
+Cell[14606, 388, 1714, 44, 97, "Input"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
+
